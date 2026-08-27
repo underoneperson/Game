@@ -3,383 +3,211 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>猪猪大作战 | Unity Game Demo</title>
-    <meta name="description" content="猪猪大作战 Unity 游戏 Demo 展示页，包含实机视频、项目说明与技术关键词。" />
+    <title>Unity Gameplay Portfolio</title>
+    <meta name="description" content="个人 Unity 游戏作品集，展示移动端 RTS 与 ScrapOrbit 两个可播放 Demo。" />
     <style>
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
       body {
         margin: 0;
-        background: #f7f1e8;
-        color: #171717;
+        background: #f4f7f5;
+        color: #141515;
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-
-      a {
-        color: inherit;
-        text-decoration: none;
+      a { color: inherit; text-decoration: none; }
+      .wrap { width: min(100%, 1152px); margin: 0 auto; padding-left: 20px; padding-right: 20px; }
+      header { position: sticky; top: 0; z-index: 5; border-bottom: 1px solid rgb(20 21 21 / 10%); background: rgb(244 247 245 / 92%); backdrop-filter: blur(14px); }
+      nav { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; padding-bottom: 16px; }
+      .brand, .nav-links a, .eyebrow, .button, .tag { font-weight: 800; }
+      .nav-links { display: flex; gap: 18px; color: #52605a; font-size: 14px; font-weight: 700; }
+      .hero { display: grid; gap: 36px; align-items: end; padding-top: 52px; padding-bottom: 60px; }
+      .eyebrow { margin: 0 0 14px; color: #c2472d; font-size: 14px; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 860px; margin-bottom: 0; font-size: 68px; line-height: 1.02; font-weight: 900; }
+      .lead { max-width: 760px; margin-top: 24px; color: #3f4b45; font-size: 18px; line-height: 1.8; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+      .button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; border-radius: 8px; padding: 0 20px; font-size: 14px; }
+      .primary { background: #141515; color: white; }
+      .secondary { border: 1px solid rgb(20 21 21 / 18%); }
+      .scope { border: 1px solid rgb(20 21 21 / 10%); border-radius: 8px; background: white; padding: 20px; box-shadow: 0 20px 60px rgb(20 21 21 / 9%); }
+      .scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 18px; }
+      .metric { border-radius: 8px; padding: 16px; }
+      .metric.one { background: #fff1de; }
+      .metric.two { background: #e8f3ff; }
+      .metric strong { display: block; font-size: 30px; line-height: 1; }
+      .metric span { display: block; margin-top: 8px; color: #52605a; font-size: 14px; font-weight: 700; }
+      .chips, .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+      .chips { margin-top: 16px; }
+      .tag { border-radius: 8px; background: #eef2ef; color: #38423d; padding: 8px 12px; font-size: 14px; }
+      .projects-band { border-top: 1px solid rgb(20 21 21 / 10%); border-bottom: 1px solid rgb(20 21 21 / 10%); background: white; }
+      .section { padding-top: 48px; padding-bottom: 48px; }
+      .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+      .section-head p { max-width: 640px; color: #52605a; line-height: 1.75; }
+      h2 { margin-bottom: 0; font-size: 38px; line-height: 1.15; font-weight: 900; }
+      .project-list { display: grid; gap: 24px; }
+      .project-card { display: grid; gap: 20px; border: 1px solid rgb(20 21 21 / 10%); border-radius: 8px; background: #f4f7f5; padding: 16px; }
+      .video-shell { overflow: hidden; border-radius: 8px; background: #111; }
+      video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: contain; }
+      .project-copy { display: flex; flex-direction: column; justify-content: space-between; gap: 20px; padding: 4px; }
+      .project-title { display: flex; align-items: center; gap: 12px; }
+      .project-title img { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; }
+      h3 { margin-bottom: 0; font-size: 26px; line-height: 1.15; font-weight: 900; }
+      .subtitle { margin-bottom: 4px; color: #0d7566; font-size: 14px; font-weight: 900; }
+      .summary, li, .focus-card p { color: #3f4b45; line-height: 1.75; }
+      ul { margin: 16px 0 0; padding-left: 20px; }
+      .project-copy .tag { background: white; }
+      .focus { display: grid; gap: 24px; }
+      .focus-grid { display: grid; gap: 16px; }
+      .focus-card { border: 1px solid rgb(20 21 21 / 10%); border-radius: 8px; background: white; padding: 20px; }
+      .focus-card strong { display: block; font-size: 18px; }
+      footer { border-top: 1px solid rgb(20 21 21 / 10%); background: #141515; color: white; }
+      .footer-inner { display: flex; flex-direction: column; gap: 10px; padding-top: 28px; padding-bottom: 28px; }
+      .footer-inner p { margin: 0; }
+      .footer-note { color: rgb(255 255 255 / 70%); font-size: 14px; }
+      @media (min-width: 760px) {
+        .section-head, .footer-inner { flex-direction: row; align-items: end; justify-content: space-between; }
+        .focus-grid { grid-template-columns: repeat(2, 1fr); }
       }
-
-      .nav {
-        border-bottom: 1px solid rgb(23 23 23 / 10%);
-        background: rgb(247 241 232 / 95%);
-      }
-
-      .nav-inner,
-      .hero,
-      .stats,
-      .details,
-      .footer-inner {
-        width: min(100%, 1152px);
-        margin: 0 auto;
-        padding-left: 20px;
-        padding-right: 20px;
-      }
-
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 16px;
-        padding-bottom: 16px;
-      }
-
-      .brand,
-      .nav-links a,
-      .eyebrow,
-      .button,
-      .stat-title,
-      .tag {
-        font-weight: 700;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 18px;
-        color: #5e554a;
-        font-size: 14px;
-      }
-
-      .hero {
-        display: grid;
-        gap: 32px;
-        align-items: center;
-        padding-top: 42px;
-        padding-bottom: 48px;
-      }
-
-      .eyebrow {
-        margin: 0 0 16px;
-        color: #b53a27;
-        font-size: 14px;
-      }
-
-      h1 {
-        margin: 0;
-        max-width: 780px;
-        font-size: 64px;
-        line-height: 1.02;
-        font-weight: 900;
-      }
-
-      .lead {
-        max-width: 690px;
-        margin: 20px 0 0;
-        color: #4d463f;
-        font-size: 18px;
-        line-height: 1.8;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 28px;
-      }
-
-      .button {
-        display: inline-flex;
-        min-height: 44px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        padding: 0 20px;
-        font-size: 14px;
-      }
-
-      .button.primary {
-        background: #171717;
-        color: white;
-      }
-
-      .button.secondary {
-        border: 1px solid rgb(23 23 23 / 20%);
-      }
-
-      .video-frame {
-        border: 1px solid rgb(23 23 23 / 12%);
-        border-radius: 8px;
-        background: #1c1715;
-        padding: 8px;
-        box-shadow: 0 24px 70px rgb(23 23 23 / 18%);
-      }
-
-      .video-shell {
-        aspect-ratio: 16 / 9;
-        overflow: hidden;
-        border-radius: 6px;
-        background: black;
-      }
-
-      video {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-
-      .stats-band {
-        border-top: 1px solid rgb(23 23 23 / 10%);
-        border-bottom: 1px solid rgb(23 23 23 / 10%);
-        background: #fefbf5;
-      }
-
-      .stats {
-        display: grid;
-        gap: 16px;
-        padding-top: 24px;
-        padding-bottom: 24px;
-      }
-
-      .stat,
-      .panel {
-        border: 1px solid rgb(23 23 23 / 10%);
-        border-radius: 8px;
-        padding: 20px;
-      }
-
-      .stat {
-        background: white;
-      }
-
-      .stat-title {
-        margin: 0;
-        color: #b53a27;
-        font-size: 14px;
-      }
-
-      .stat p,
-      .details p,
-      li {
-        color: #403a34;
-        line-height: 1.75;
-      }
-
-      .details {
-        display: grid;
-        gap: 32px;
-        padding-top: 48px;
-        padding-bottom: 48px;
-      }
-
-      .details h2 {
-        margin: 0;
-        font-size: 36px;
-        line-height: 1.18;
-      }
-
-      .panel-grid {
-        display: grid;
-        gap: 20px;
-      }
-
-      .panel {
-        background: #fefbf5;
-      }
-
-      .panel.alt {
-        background: #e9f6f2;
-      }
-
-      .panel h3 {
-        margin: 0;
-        font-size: 18px;
-      }
-
-      ul {
-        margin: 16px 0 0;
-        padding-left: 20px;
-      }
-
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 16px;
-      }
-
-      .tag {
-        border-radius: 8px;
-        background: white;
-        color: #155f54;
-        padding: 8px 12px;
-        font-size: 14px;
-      }
-
-      footer {
-        border-top: 1px solid rgb(23 23 23 / 10%);
-        background: #171717;
-        color: white;
-      }
-
-      .footer-inner {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding-top: 28px;
-        padding-bottom: 28px;
-      }
-
-      .footer-inner p {
-        margin: 0;
-      }
-
-      .footer-note {
-        color: rgb(255 255 255 / 70%);
-        font-size: 14px;
-      }
-
-      @media (min-width: 720px) {
-        .stats {
-          grid-template-columns: repeat(3, 1fr);
-        }
-
-        .panel-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .footer-inner {
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-        }
-      }
-
       @media (min-width: 980px) {
-        .hero {
-          grid-template-columns: 1.08fr 0.92fr;
-        }
-
-        .details {
-          grid-template-columns: 0.9fr 1.1fr;
-        }
+        .hero { grid-template-columns: 1fr 0.78fr; }
+        .project-card { grid-template-columns: 1.05fr 0.95fr; }
+        .focus { grid-template-columns: 0.8fr 1.2fr; }
       }
-
       @media (max-width: 640px) {
-        h1 {
-          font-size: 48px;
-        }
-
-        .lead {
-          font-size: 16px;
-        }
+        h1 { font-size: 46px; }
+        .lead { font-size: 16px; }
       }
     </style>
   </head>
   <body>
-    <header class="nav">
-      <nav class="nav-inner">
-        <a class="brand" href="#top">猪猪大作战</a>
+    <header>
+      <nav class="wrap">
+        <a class="brand" href="#top">Unity Portfolio</a>
         <div class="nav-links">
-          <a href="#demo">Demo</a>
-          <a href="#details">项目说明</a>
+          <a href="#projects">Projects</a>
+          <a href="#focus">Focus</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <section id="top" class="hero">
+      <section id="top" class="wrap hero">
         <div>
-          <p class="eyebrow">Unity Game Demo</p>
-          <h1>猪猪大作战</h1>
+          <p class="eyebrow">Unity Gameplay / Systems Portfolio</p>
+          <h1>面向面试展示的个人游戏作品集</h1>
           <p class="lead">
-            一个面向面试展示的游戏 Demo 项目页。打开页面即可观看实机演示，并快速了解项目定位、实现内容和技术关键词。
+            这里集中展示两个 Unity 项目：偏系统架构和群体控制的移动端 RTS，以及偏玩法原型和完整可玩切片的 ScrapOrbit。面试官打开页面即可看视频、扫技术点、进入项目讲解。
           </p>
           <div class="actions">
-            <a class="button primary" href="#demo">观看演示</a>
-            <a class="button secondary" href="#details">查看项目说明</a>
+            <a class="button primary" href="#projects">查看作品</a>
+            <a class="button secondary" href="#focus">技术重点</a>
           </div>
         </div>
 
-        <div id="demo" class="video-frame">
-          <div class="video-shell">
-            <video controls preload="metadata" playsinline poster="demo-poster.jpg" src="demo-video-web.mp4">
-              你的浏览器不支持视频播放。
-            </video>
+        <aside class="scope">
+          <p class="eyebrow" style="color:#0d7566">Portfolio Scope</p>
+          <div class="scope-grid">
+            <div class="metric one"><strong>2</strong><span>Playable demos</span></div>
+            <div class="metric two"><strong>Unity</strong><span>2022.3 projects</span></div>
           </div>
-        </div>
+          <div class="chips">
+            <span class="tag">Unity Gameplay</span>
+            <span class="tag">C# Systems</span>
+            <span class="tag">DOTS / ECS</span>
+            <span class="tag">Flow Field</span>
+          </div>
+        </aside>
       </section>
 
-      <section class="stats-band">
-        <div class="stats">
-          <article class="stat">
-            <h2 class="stat-title">核心体验</h2>
-            <p>快节奏对抗、角色移动、场景互动与胜负反馈</p>
-          </article>
-          <article class="stat">
-            <h2 class="stat-title">演示重点</h2>
-            <p>完整展示实际运行画面，适合面试时直接播放讲解</p>
-          </article>
-          <article class="stat">
-            <h2 class="stat-title">项目定位</h2>
-            <p>Unity 游戏 Demo，用于展示玩法实现与项目完成度</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="details" class="details">
-        <div>
-          <p class="eyebrow">Project Notes</p>
-          <h2>适合面试现场快速讲解的作品页</h2>
-          <p>
-            这个页面把重点集中在实机视频和项目贡献上，面试官不需要下载文件或安装游戏，也能直接看到 Demo 效果。
-          </p>
-        </div>
-
-        <div class="panel-grid">
-          <article class="panel">
-            <h3>负责内容</h3>
-            <ul>
-              <li>玩法原型与核心交互实现</li>
-              <li>角色控制、反馈表现与演示流程整理</li>
-              <li>Unity 场景搭建、调试与 Demo 输出</li>
-            </ul>
-          </article>
-
-          <article class="panel alt">
-            <h3>技术关键词</h3>
-            <div class="tags">
-              <span class="tag">Unity</span>
-              <span class="tag">C#</span>
-              <span class="tag">Gameplay</span>
-              <span class="tag">Animation</span>
-              <span class="tag">UI Flow</span>
+      <section id="projects" class="projects-band">
+        <div class="wrap section">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Selected Projects</p>
+              <h2>作品演示</h2>
             </div>
-          </article>
+            <p>每个项目都保留视频演示和面试讲解要点，重点放在我做了什么、为什么这样做、能体现什么工程能力。</p>
+          </div>
+
+          <div class="project-list">
+            <article class="project-card">
+              <div class="video-shell">
+                <video controls preload="metadata" playsinline poster="demo-poster.jpg" src="demo-video-web.mp4">
+                  你的浏览器不支持视频播放。
+                </video>
+              </div>
+              <div class="project-copy">
+                <div>
+                  <div class="project-title">
+                    <div>
+                      <p class="subtitle">Unity 2022.3 + DOTS + URP</p>
+                      <h3>猪猪大作战 / Mobile RTS</h3>
+                    </div>
+                  </div>
+                  <p class="summary">移动端横屏 RTS 面试作品，围绕 ECS 架构、Flow Field 群体寻路、程序化地形、战争迷雾、兵营产兵和道具经济构建。</p>
+                  <ul>
+                    <li>使用 ECS System 承担单位移动、地形生成、兵营产兵、战斗接触销毁等批处理逻辑。</li>
+                    <li>Flow Field 支持多单位共享寻路结果，并处理障碍边界、阵型停车和重复指令抖动。</li>
+                    <li>保留 MonoBehaviour 层处理摄像机、输入、UI、动画桥接和低频经济服务，边界清晰。</li>
+                  </ul>
+                </div>
+                <div class="tags">
+                  <span class="tag">DOTS</span><span class="tag">Entities 1.0</span><span class="tag">Flow Field</span><span class="tag">URP</span><span class="tag">Hybrid Rendering</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="video-shell">
+                <video controls preload="metadata" playsinline poster="scraporbit-poster.jpg" src="scraporbit-web.mp4">
+                  你的浏览器不支持视频播放。
+                </video>
+              </div>
+              <div class="project-copy">
+                <div>
+                  <div class="project-title">
+                    <img src="scraporbit-icon.png" alt="" />
+                    <div>
+                      <p class="subtitle">First Playable Vertical Slice</p>
+                      <h3>ScrapOrbit / 轨道清道夫</h3>
+                    </div>
+                  </div>
+                  <p class="summary">太空废料生存动作 Demo，包含磁吸废料、轨道环绕、释放投掷、自动攻击、敌人波次、升级选择和运行时 UI。</p>
+                  <ul>
+                    <li>从 Bootstrap 场景程序化创建可玩的 vertical slice，不依赖外部复杂美术资源也能直接运行。</li>
+                    <li>实现玩家移动、圆形软边界、磁吸废料、投掷伤害、经验收集和 24 个升级定义。</li>
+                    <li>搭建菜单、HUD、暂停、结算、升级选择、触控控件，并加入确定性随机、JSON 存档和测试。</li>
+                  </ul>
+                </div>
+                <div class="tags">
+                  <span class="tag">Gameplay Prototype</span><span class="tag">UI Toolkit</span><span class="tag">Upgrade System</span><span class="tag">Save Data</span><span class="tag">EditMode Tests</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="focus" class="wrap section focus">
+        <div>
+          <p class="eyebrow" style="color:#0d7566">Interview Focus</p>
+          <h2>可展开讲的技术重点</h2>
+        </div>
+        <div class="focus-grid">
+          <div class="focus-card"><strong>Unity Gameplay</strong><p>结合实际演示讲玩法循环、输入反馈、战斗表现和运行时状态流。</p></div>
+          <div class="focus-card"><strong>C# Systems</strong><p>讲系统拆分、服务边界、数据结构、测试与项目可维护性。</p></div>
+          <div class="focus-card"><strong>DOTS / ECS</strong><p>讲 Entity、Component、System、Hybrid 渲染桥接和结构性变更经验。</p></div>
+          <div class="focus-card"><strong>Flow Field Pathfinding</strong><p>讲 Cost / Integration / Flow Field，以及群体移动、障碍和阵型处理。</p></div>
+          <div class="focus-card"><strong>Runtime UI</strong><p>讲 HUD、升级选择、背包商店、触控面板和数据刷新方式。</p></div>
+          <div class="focus-card"><strong>Performance-minded Architecture</strong><p>讲分帧启动、对象池、批处理、GPU Instancing 和调试取舍。</p></div>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="footer-inner">
-        <p><strong>猪猪大作战 Demo 展示</strong></p>
-        <p class="footer-note">把这里换成你的姓名、邮箱或 GitHub 链接后即可投递。</p>
+      <div class="wrap footer-inner">
+        <p><strong>Unity Gameplay Portfolio</strong></p>
+        <p class="footer-note">后续可替换为姓名、邮箱、GitHub、Bilibili 或作品下载链接。</p>
       </div>
     </footer>
   </body>
